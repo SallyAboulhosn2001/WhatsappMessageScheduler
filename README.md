@@ -1,7 +1,7 @@
 Whatsapp Message Scheduler 
 # WhatsApp Message Scheduler
 
-💭 **Imagine scheduling WhatsApp messages that send themselves—without you lifting a finger!**
+💭 **Imagine scheduling WhatsApp messages that send themselves, without you lifting a finger!**
 
 This is a conceptual project demonstrating automation and AI workflow design using React, Vite, Tailwind CSS, and n8n. The workflow is designed to schedule WhatsApp messages automatically, though it’s currently conceptual and does not use paid WhatsApp APIs.
 
