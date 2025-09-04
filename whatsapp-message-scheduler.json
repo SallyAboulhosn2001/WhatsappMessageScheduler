@@ -1,0 +1,185 @@
+{
+  "name": "whatsapp-message-scheduler",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "88832ba8-d8df-475c-9bcc-25c2d628617f",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -480,
+        0
+      ],
+      "id": "28429352-88e8-4448-aea8-5030d2acbf1d",
+      "name": "Webhook",
+      "webhookId": "88832ba8-d8df-475c-9bcc-25c2d628617f"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7f0e0eb3-791f-424f-be09-2ae24ae4e709",
+              "name": "",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "26710a0f-b449-4194-95cf-193deaabb5bd",
+              "name": "",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "f23d315d-8526-4075-a6fc-2825063716af",
+              "name": "",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "d6b0f1f6-6efa-4ea2-8831-ed5e1e95fe22",
+              "name": "body.number",
+              "value": "={{ $json.body.number }}",
+              "type": "string"
+            },
+            {
+              "id": "b342902f-d202-4922-8a9d-3a8c446a4e65",
+              "name": "body.message",
+              "value": "={{ $json.body.message }}",
+              "type": "string"
+            },
+            {
+              "id": "6a987faf-263c-4868-bfbf-7c80ba2832c7",
+              "name": "body.time",
+              "value": "={{ $json.body.time }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -288,
+        0
+      ],
+      "id": "1ffea1f1-e5d0-47a0-8a2f-6bb974c54cd2",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "resume": "specificTime",
+        "dateTime": "={{ $json.body.time }}"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -96,
+        0
+      ],
+      "id": "d7535737-6756-4063-8491-5a842bdb0862",
+      "name": "Wait",
+      "webhookId": "93db8f27-fe2c-4905-bab8-61eda12012ae"
+    },
+    {
+      "parameters": {
+        "url": "http://localhost:5173/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        304,
+        0
+      ],
+      "id": "439bcf37-fd59-4ac7-8d79-a19795a790f3",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "=",
+        "recipientPhoneNumber": "=",
+        "messageType": "video",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        112,
+        0
+      ],
+      "id": "1e866ab2-0cfb-41e5-bcd9-1f703f0a81fa",
+      "name": "Send message",
+      "webhookId": "cce6e707-6a3b-485e-be1d-d3346bf7a623",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "qKc3VoUO5dSrmTLJ",
+          "name": "WhatsApp account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send message": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4d295218-9ac5-4332-8153-1bdfd74c36cd",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d1aa5c8cbb8b266e8f0c97e292637460102aad0e0984b41b0332214e08d3a15a"
+  },
+  "id": "dPn36Rm3LYN6LhuO",
+  "tags": []
+}
